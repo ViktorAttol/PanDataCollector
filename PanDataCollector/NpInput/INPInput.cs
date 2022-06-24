@@ -1,6 +1,6 @@
 ﻿namespace PanDataCollector.NpInput
 {
-    public interface NPInput
+    public interface INPInput
     {
         
     }
