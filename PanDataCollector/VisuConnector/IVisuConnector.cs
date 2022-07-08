@@ -29,6 +29,11 @@ namespace PanDataCollector.VisuConnector
         void ConnectWithVisu();
 
         /// <summary>
+        /// Disconnects from visualisation software
+        /// </summary>
+        void DisconnectFromVisu();
+
+        /// <summary>
         /// Subscribe to be notified about connection status changes
         /// </summary>
         /// <param name="receiver"></param>
