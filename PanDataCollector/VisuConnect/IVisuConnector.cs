@@ -1,4 +1,7 @@
-﻿using PanDataCollector.DataCollectorController;
+﻿using System;
+using System.Collections.Generic;
+using PanDataCollector.DataCollectorController;
+using PanDataCollector.NpInput;
 using PanDataCollector.PhenotypeConnector;
 
 namespace PanDataCollector.VisuConnector
@@ -15,13 +18,13 @@ namespace PanDataCollector.VisuConnector
         /// Sends single read to connected software
         /// </summary>
         /// <param name="read"></param>
-        void SendRead(string read);
+        void SendRead(ReadData read);
         
         /// <summary>
         /// Sends date of a single found phenotype 
         /// </summary>
         /// <param name="phenotype"></param>
-        void SendPhenotype(Phenotype phenotype);
+        void SendPhenotypes(List<PhenotypeData> Data);
         
         /// <summary>
         /// Tries to connect with visualisation software via sockets
@@ -37,8 +40,8 @@ namespace PanDataCollector.VisuConnector
         /// Subscribe to be notified about connection status changes
         /// </summary>
         /// <param name="receiver"></param>
-        void SubscribeForConnectionChangeStatus(IConnectionChangeReceiver receiver);
-        void UnSubscribeForConnectionChangeStatus(IConnectionChangeReceiver receiver);
+        void SubscribeForConnectionChangeStatus(Action<ConnectionStatus> cbConnectionChangedFunc);
+        void UnSubscribeForConnectionChangeStatus(Action<ConnectionStatus> cbConnectionChangedFunc);
 
     }
 }

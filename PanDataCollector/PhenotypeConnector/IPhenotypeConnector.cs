@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PanDataCollector.NpInput;
 
 namespace PanDataCollector.PhenotypeConnector
 {
@@ -9,14 +10,14 @@ namespace PanDataCollector.PhenotypeConnector
         /// Calculates all phenotypes with the given reads
         /// </summary>
         /// <param name="reads"></param>
-        void CalculatePhenotypes(List<string> reads);
+        void CalculatePhenotypes(List<ReadData> reads);
         
         /// <summary>
         /// Subscribe to get phenotype data when found
         /// </summary>
         /// <param name="receiver"></param>
-        void SubscribeForPhenotypeResults(IPhenotypeResultReceiver receiver);
-        void UnSubscribeForPhenotypeResults(IPhenotypeResultReceiver receiver);
+        void SubscribeForPhenotypeResults(Action<List<PhenotypeData>> cbReceivePhenotypeFunc);
+        void UnSubscribeForPhenotypeResults(Action<List<PhenotypeData>> cbReceivePhenotypeFunc);
 
     }
 }

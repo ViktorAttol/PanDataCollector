@@ -1,8 +1,10 @@
-﻿namespace PanDataCollector.PhenotypeConnector
+﻿using System.Collections.Generic;
+
+namespace PanDataCollector.PhenotypeConnector
 {
     public enum Phenotype
     {
-        Haircolor, Eyecolor, Skincolor
+        Eye, Hair, Skin
     }
     
     public interface IPhenotypeResultReceiver
@@ -10,14 +12,14 @@
         /// <summary>
         /// Receives the data of a single found phenotype
         /// </summary>
-        /// <param name="result"></param>
-        void ReceivePhenotypeResult(PhenotypeResult result);
+        /// <param name="data"></param>
+        void ReceivePhenotypeResult(List<PhenotypeData> data);
     }
 
-    public struct PhenotypeResult
+    public struct PhenotypeData
     {
         public Phenotype phenotype;
         public string color;
-        public float percentage;
+        public float probability;
     }
 }
