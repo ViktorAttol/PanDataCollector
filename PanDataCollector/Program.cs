@@ -1,6 +1,7 @@
 ﻿using System;
 using PanDataCollector.DataCollectorController;
 using PanDataCollector.NpInput;
+using PanDataCollector.PhenotypeConnector;
 using PanDataCollector.VisuConnector;
 
 namespace PanDataCollector
@@ -11,7 +12,9 @@ namespace PanDataCollector
         {
             StateMachine stateMachine = StateMachine.Instance;
             stateMachine.SetNPInput(new NPInput());
-            stateMachine.SetPhenotypeConnector(new PhenotypeConnector.PhenotypeConnector());
+            IPhenotypeConnector phenotypeConnector = new PhenotypeConnector.PhenotypeConnector();
+            stateMachine.SetPhenotypeConnector(phenotypeConnector);
+            phenotypeConnector.SubscribeForPhenotypeResults(stateMachine.ReceivePhenotypeResult);
             IVisuConnector visuConnector = new VisuConnector.VisuConnector();
             stateMachine.SetVisuConnector(visuConnector);
             visuConnector.SubscribeForConnectionChangeStatus(stateMachine.ConnectionStatusChanged);

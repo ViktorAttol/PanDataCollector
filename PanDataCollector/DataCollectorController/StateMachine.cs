@@ -50,7 +50,7 @@ namespace PanDataCollector.DataCollectorController
 
         private int requiredReads = 41;
 
-        private List<PhenotypeData> phenotypeDatas;
+        private List<PhenotypeData> phenotypeDatas = new List<PhenotypeData>();
 
         public void RunStateMachine()
         {
@@ -142,6 +142,7 @@ namespace PanDataCollector.DataCollectorController
 
         public void ReceivePhenotypeResult(List<PhenotypeData> data)
         {
+            Console.WriteLine("StateMachine::PhenotypeDataReceived -- with: " + data.Count + " elements");
             phenotypeDatas = data;
         }
     }

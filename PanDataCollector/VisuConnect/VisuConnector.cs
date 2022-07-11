@@ -69,7 +69,7 @@ namespace PanDataCollector.VisuConnector
                 streamWriter.WriteLine(phenotypeData.Count);
                 foreach (var data in phenotypeData)
                 {
-                    streamWriter.WriteLine(data.phenotype);
+                    streamWriter.WriteLine((int)data.phenotype);
                     streamWriter.WriteLine(data.color);
                     streamWriter.WriteLine(data.probability.ToString());
                 }
@@ -133,6 +133,7 @@ namespace PanDataCollector.VisuConnector
             try
             {
                 Console.WriteLine("Client disconnected!");
+                SendState(CollectorState.End);
                 streamWriter.Close();
                 networkStream.Close();
                 //sender.Shutdown(SocketShutdown.Both);
