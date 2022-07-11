@@ -13,6 +13,7 @@ namespace PanDataCollector.VisuConnector
     // Reminder: dotnet build / dotnet run
     class VisuConnector : IVisuConnector
     {
+        private TcpClient client;
         private Socket sender = null;
         private NetworkStream networkStream = null;
         private StreamWriter streamWriter = null;
@@ -82,19 +83,22 @@ namespace PanDataCollector.VisuConnector
         {
             try
             {
+                client = new TcpClient();
+                client.Connect("localhost", 8080);
+                networkStream = client.GetStream();
+                /*
                 IPHostEntry host = Dns.GetHostEntry("127.0.0.1");
                 IPAddress ipAddress = host.AddressList[0];
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11100);
-
                 Socket sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
+                */
                 try
                 {
-                    sender.Connect(localEndPoint);
+                    //sender.Connect(localEndPoint);
                     OnConnectionChanged(ConnectionStatus.Connected);
-                    Console.WriteLine("Socket connected to {0} ", sender.RemoteEndPoint.ToString());
+                    //Console.WriteLine("Socket connected to {0} ", sender.RemoteEndPoint.ToString());
 
-                    networkStream = new NetworkStream(sender);
+                    //networkStream = new NetworkStream(sender);
                     streamWriter = new StreamWriter(networkStream);
                     streamReader = new StreamReader(networkStream);
                 }
@@ -131,8 +135,9 @@ namespace PanDataCollector.VisuConnector
                 Console.WriteLine("Client disconnected!");
                 streamWriter.Close();
                 networkStream.Close();
-                sender.Shutdown(SocketShutdown.Both);
-                sender.Close();
+                //sender.Shutdown(SocketShutdown.Both);
+                //sender.Close();
+                client.Close();
                 OnConnectionChanged(ConnectionStatus.ConnectionClosed);
             }
 

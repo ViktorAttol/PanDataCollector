@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using PanDataCollector.NpInput;
 using PanDataCollector.PhenotypeConnector;
 using PanDataCollector.VisuConnector;
@@ -101,6 +103,7 @@ namespace PanDataCollector.DataCollectorController
         
         private void CaseConnect()
         {
+            Console.WriteLine("StateMachine::StateConnected");
             ReadData read = npInput.GetRead();
             reads.Add(read);
             visuConnector.SendRead(read);
